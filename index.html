@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página con Imagen Flotante y Sombra</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gill+Sans+Nova:wght@400;700&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Gill Sans Nova', sans-serif;
+        }
+
+        .full-height-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background-image: url('https://blazmed.es/cdn/shop/files/BLAZMENTIENDA_26_1950x.jpg?v=1735304349');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .full-height-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
+            z-index: 1;
+        }
+
+        .full-height-section h1 {
+            position: relative;
+            z-index: 2;
+            margin: 0 20px; /* Margen horizontal para móviles */
+            font-size: 20px;
+            background: linear-gradient(90deg, #ff8c00, #ff2e63, #ff8c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid white;
+        }
+
+        .full-height-section h2 {
+            position: relative;
+            z-index: 2;
+            font-size: 1.5rem;
+            color: white;
+            margin: 10px 20px 0; /* Margen horizontal para móviles */
+        }
+
+        .floating-image {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            max-width: 415px; /* Ajuste para móviles */
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 2px 5px rgba(242, 226, 221, 0.7));
+        }
+
+        .access-button {
+            position: relative;
+            z-index: 3;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background-color: #ff2e63;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .access-button:hover {
+            transform: scale(1.1);
+        }
+
+        .formulariopotencial {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 4;
+            width: 78%;
+            max-width: 400px; /* Ajuste para móviles */
+        }
+
+        .formulariopotencial h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .formulariopotencial input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .formulariopotencial button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff2e63;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .formulariopotencial button:hover {
+            background-color: #ff1a4d;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 3;
+        }
+
+        /* Media Queries para Responsive Design */
+        @media (max-width: 768px) {
+            .full-height-section h1 {
+                font-size: 18px; /* Tamaño de fuente más pequeño para móviles */
+                margin: 0 15px; /* Margen ajustado para móviles */
+            }
+
+            .full-height-section h2 {
+                font-size: 1.2rem; /* Tamaño de fuente más pequeño para móviles */
+                margin: 10px 15px 0; /* Margen ajustado para móviles */
+            }
+
+            .floating-image {
+                width: 90%; /* Imagen más pequeña en móviles */
+            }
+
+            .access-button {
+                font-size: 0.9rem; /* Tamaño de fuente más pequeño para móviles */
+                padding: 8px 16px; /* Padding ajustado para móviles */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .full-height-section h1 {
+                font-size: 16px; /* Tamaño de fuente más pequeño para pantallas muy pequeñas */
+                margin: 0 10px; /* Margen ajustado para pantallas muy pequeñas */
+            }
+
+            .full-height-section h2 {
+                font-size: 1rem; /* Tamaño de fuente más pequeño para pantallas muy pequeñas */
+                margin: 10px 10px 0; /* Margen ajustado para pantallas muy pequeñas */
+            }
+
+            .floating-image {
+                width: 85%; /* Imagen más pequeña en pantallas muy pequeñas */
+            }
+
+            .access-button {
+                font-size: 0.8rem; /* Tamaño de fuente más pequeño para pantallas muy pequeñas */
+                padding: 6px 12px; /* Padding ajustado para pantallas muy pequeñas */
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="full-height-section">
+        <h1 id="typing-text"></h1>
+        <h2>Regístrate y mira el vídeo que he preparado para ti</h2>
+        <img src="cccc.png" alt="Imagen Flotante" class="floating-image">
+        <button class="access-button" onclick="openForm()">Acceder</button>
+    </section>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="formulariopotencial" id="formulariopotencial">
+        <h3>Rellena Tu información para enviarte mi Historia y cómo creé la Marca Blazmed</h3>
+        <input type="text" placeholder="Nombre" required>
+        <input type="tel" placeholder="Teléfono" required>
+        <input type="email" placeholder="Email" required>
+        <button onclick="submitForm()">Acceder al vídeo completo</button>
+    </div>
+
+    <script>
+        const textElement = document.getElementById("typing-text");
+        const textArray = ["Crea Tu Marca de Ropa en 5 Pasos"];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
+        function typeEffect() {
+            const currentText = textArray[textIndex];
+            if (isDeleting) {
+                textElement.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                textElement.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentText.length) {
+                setTimeout(() => isDeleting = true, 1000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+            }
+            setTimeout(typeEffect, isDeleting ? 100 : 150);
+        }
+
+        function openForm() {
+            document.getElementById('formulariopotencial').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function submitForm() {
+            alert('Formulario enviado con éxito');
+            document.getElementById('formulariopotencial').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        typeEffect();
+    </script>
+</body>
+</html>
