@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página con Video y Botón</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gill+Sans+Nova:wght@400;700&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Gill Sans Nova', sans-serif;
+        }
+
+        .full-height-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background-image: url('https://blazmed.es/cdn/shop/files/BLAZMENTIENDA_26_1950x.jpg?v=1735304349');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .full-height-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
+            z-index: 1;
+        }
+
+        .full-height-section h1, .full-height-section h2 {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+        .video-container {
+            z-index: 2;
+        }
+
+        .access-button {
+            position: relative;
+            z-index: 3;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background-color: #ff2e63;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .access-button:hover {
+            transform: scale(1.1);
+        }
+
+        .calendly-inline-widget {
+            margin: 0 auto;
+            display: none;
+            border: 2px solid transparent;
+            transition: border-color 0.5s ease;
+        }
+
+        .calendly-inline-widget.visible {
+            display: block;
+        }
+
+        .calendly-inline-widget.blink {
+            animation: blink-border 0.5s infinite alternate;
+        }
+
+        @keyframes blink-border {
+            from { border-color: transparent; }
+            to { border-color: white; }
+        }
+
+        .warning-message {
+            display: none;
+            position: absolute;
+            bottom: 120%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 0, 0, 0.8);
+            color: white;
+            padding: 5px;
+            border-radius: 10px;
+            border: 2px solid red;
+            text-align: center;
+            font-size: 0.9rem;
+            max-width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <section class="full-height-section">
+        <h1>Crea Tu Marca de Ropa en 5 Pasos</h1>
+        <h2>En Sólo 5 Minutos Te Enseñaré a Crear Tu Marca</h2>
+        <div class="video-container">
+            <iframe loading="lazy" style="width: 100%; height: 300px; border-radius: 10px;" 
+                src="https://www.canva.com/design/DAGe_CnX074/mzTLtnu9PiBvYQwsP9XvIA/watch?embed" 
+                allowfullscreen></iframe>
+        </div>
+        <div class="button-container" style="position: relative; display: flex; flex-direction: column; align-items: center;">
+            <div id="warning-message" class="warning-message">Debes Ver el Vídeo Antes de Darte Propuesta</div>
+            <a href="#" class="access-button" id="agendar-button">Agendar Asesoría</a>
+        </div>
+    </section>
+
+    <div class="calendly-inline-widget" data-url="https://calendly.com/cristian-blazmed/asesoria" style="min-width:320px;height:700px;"></div>
+
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <script>
+        let isTimeElapsed = false;
+        
+        setTimeout(() => {
+            isTimeElapsed = true;
+            document.querySelector('.calendly-inline-widget').classList.add('visible');
+        }, 60000);
+
+        document.getElementById('agendar-button').addEventListener('click', (e) => {
+            e.preventDefault();
+            const calendlyWidget = document.querySelector('.calendly-inline-widget');
+            const warningMessage = document.getElementById('warning-message');
+
+            if (!isTimeElapsed) {
+                warningMessage.style.display = 'block';
+                setTimeout(() => {
+                    warningMessage.style.display = 'none';
+                }, 3000);
+            } else {
+                calendlyWidget.classList.add('blink');
+                calendlyWidget.scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => {
+                    calendlyWidget.classList.remove('blink');
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
